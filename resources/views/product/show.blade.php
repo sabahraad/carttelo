@@ -423,10 +423,11 @@ $outsideDhakaCharge = Setting::getDeliveryCharge(false);
                 @if ($product->video_url)
                     <div class="mb-8">
                         <h3 class="text-lg font-semibold text-gray-900 mb-3">Product Video</h3>
-                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden bg-gray-900">
+                        <div class="rounded-xl overflow-hidden bg-gray-900" style="aspect-ratio: 16/9;">
                             @php
                                 $videoId = '';
-                                if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s]+)/', $product->video_url, $matches)) {
+                                // Match standard YouTube URLs: watch?v=, youtu.be/, embed/, shorts/
+                                if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^&\s?]+)/', $product->video_url, $matches)) {
                                     $videoId = $matches[1];
                                 }
                             @endphp
@@ -434,7 +435,11 @@ $outsideDhakaCharge = Setting::getDeliveryCharge(false);
                                 <iframe src="https://www.youtube.com/embed/{{ $videoId }}" 
                                         title="Product Video" frameborder="0" 
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen class="w-full h-64 lg:h-72 rounded-xl"></iframe>
+                                        allowfullscreen class="w-full h-full"></iframe>
+                            @else
+                                <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                    <p>Invalid video URL</p>
+                                </div>
                             @endif
                         </div>
                     </div>
