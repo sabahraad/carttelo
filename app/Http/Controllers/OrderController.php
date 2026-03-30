@@ -40,7 +40,7 @@ class OrderController extends Controller
         // Decrease stock
         $product->decrement('stock', $quantity);
 
-        return redirect()->route('home')
+        return redirect()->route('track-order', ['phone' => $orderData['customer_phone']])
             ->with('success', 'Your order for ' . $quantity . ' item(s) has been placed successfully! We will contact you soon.');
     }
 }

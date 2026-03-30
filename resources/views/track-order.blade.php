@@ -248,6 +248,107 @@
         .no-results p {
             color: #6b7280;
         }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 640px) {
+            .track-container {
+                padding: 20px 16px;
+            }
+            .track-header h1 {
+                font-size: 24px;
+            }
+            .track-header p {
+                font-size: 14px;
+            }
+            
+            /* Search Box Mobile */
+            .search-box {
+                padding: 20px;
+            }
+            .search-input-wrapper {
+                flex-direction: column;
+            }
+            .search-input {
+                padding: 12px 16px;
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
+            .search-btn {
+                padding: 12px 24px;
+                justify-content: center;
+            }
+            
+            /* Order Card Mobile */
+            .order-card {
+                padding: 16px;
+            }
+            .order-header {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .order-id {
+                font-size: 16px;
+            }
+            .order-status-badge {
+                align-self: flex-start;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            /* Progress Steps Mobile */
+            .progress-container {
+                margin: 16px 0;
+            }
+            .step-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .progress-steps::before,
+            .progress-line {
+                top: 16px;
+            }
+            .step-label {
+                font-size: 10px;
+                margin-top: 6px;
+            }
+            
+            /* Product Row Mobile */
+            .product-row {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px;
+            }
+            .product-image {
+                width: 100%;
+                height: auto;
+                max-height: 150px;
+                object-fit: contain;
+            }
+            .product-name {
+                font-size: 14px;
+            }
+            .product-price {
+                font-size: 16px;
+            }
+            
+            /* Button Mobile */
+            .btn-details {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+            
+            /* No Results Mobile */
+            .no-results {
+                padding: 40px 16px;
+            }
+            .no-results-icon {
+                font-size: 48px;
+            }
+            .no-results h3 {
+                font-size: 18px;
+            }
+        }
     </style>
 
     <div class="track-container">
