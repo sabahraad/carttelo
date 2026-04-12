@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -58,5 +59,32 @@ class OrderController extends Controller
 
         return redirect()->back()
             ->with('success', 'Order status updated to ' . ucfirst($newStatus) . ' successfully.');
+    }
+
+    public function downloadInvoice(Order $order)
+    {
+        $order->load('product');
+        
+        // For PDF download, use a simplified version without complex Unicode
+        // Bengali text and emojis may not render correctly in PDF
+        $pdf = Pdf::loadView('admin.orders.invoice-pdf', compact('order'));
+        
+        // Set PDF options for better rendering
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->setOptions([
+            'dpi' => 150,
+            'defaultFont' => 'DejaVu Sans',
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => false,
+        ]);
+        
+        return $pdf->download('invoice-' . $order->id . '.pdf');
+    }
+
+    public function printInvoice(Order $order)
+    {
+        $order->load('product');
+        
+        return view('admin.orders.invoice', compact('order'));
     }
 }

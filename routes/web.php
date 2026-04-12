@@ -32,6 +32,11 @@ Route::get('/order/{order}', [OrderDetailController::class, 'show'])->name('orde
 |--------------------------------------------------------------------------
 */
 
+// Redirect default login route to admin login
+Route::get('/login', function () {
+    return redirect()->route('admin.login');
+})->name('login');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     // Guest routes (allow access even if logged in, but will check in controller)
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -52,6 +57,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::put('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.update-status');
+        Route::get('/orders/{order}/invoice/download', [AdminOrderController::class, 'downloadInvoice'])->name('orders.invoice.download');
+        Route::get('/orders/{order}/invoice/print', [AdminOrderController::class, 'printInvoice'])->name('orders.invoice.print');
         
         // Settings
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');

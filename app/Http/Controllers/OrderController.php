@@ -23,9 +23,9 @@ class OrderController extends Controller
         $unitPrice = $product->finalPrice ?? 0;
         $subtotal = $unitPrice * $quantity;
         
-        // Get delivery charge
+        // Get delivery charge (0 if product has free delivery)
         $insideDhaka = $request->delivery_location === 'inside_dhaka';
-        $deliveryCharge = Setting::getDeliveryCharge($insideDhaka);
+        $deliveryCharge = $product->free_delivery ? 0 : Setting::getDeliveryCharge($insideDhaka);
         
         // Calculate total
         $totalAmount = $subtotal + $deliveryCharge;

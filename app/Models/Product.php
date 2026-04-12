@@ -21,10 +21,12 @@ class Product extends Model
         'sell_price',
         'discount_price',
         'is_active',
+        'free_delivery',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'free_delivery' => 'boolean',
         'stock' => 'integer',
         'buy_price' => 'decimal:2',
         'sell_price' => 'decimal:2',

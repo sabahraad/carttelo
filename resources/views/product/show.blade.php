@@ -2,8 +2,8 @@
 
 @php
 use App\Models\Setting;
-$insideDhakaCharge = Setting::getDeliveryCharge(true);
-$outsideDhakaCharge = Setting::getDeliveryCharge(false);
+$insideDhakaCharge = $product->free_delivery ? 0 : Setting::getDeliveryCharge(true);
+$outsideDhakaCharge = $product->free_delivery ? 0 : Setting::getDeliveryCharge(false);
 @endphp
 
 @section('title', $product->name)
@@ -412,11 +412,16 @@ $outsideDhakaCharge = Setting::getDeliveryCharge(false);
                         {{ $product->stock > 0 ? '✓ In Stock' : '✗ Out of Stock' }}
                     </span>
                     <span class="text-gray-500">{{ $product->stock }} items available</span>
+                    @if($product->free_delivery)
+                        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            🚚 Free Delivery
+                        </span>
+                    @endif
                 </div>
 
                 @if ($product->description)
-                    <div class="prose prose-blue mb-8">
-                        <p class="text-gray-600 leading-relaxed">{{ $product->description }}</p>
+                    <div class="mb-8">
+                        <div class="text-gray-600 whitespace-pre-wrap font-sans">{{ $product->description }}</div>
                     </div>
                 @endif
 
@@ -489,7 +494,11 @@ $outsideDhakaCharge = Setting::getDeliveryCharge(false);
                                     <div class="flex items-center justify-between">
                                         <div class="product-info-title">Delivery Charge</div>
                                         <div class="product-info-value" id="deliveryCharge">
-                                            ৳{{ number_format($insideDhakaCharge, 2) }}
+                                            @if($product->free_delivery)
+                                                <span class="text-green-600">FREE</span>
+                                            @else
+                                                ৳{{ number_format($insideDhakaCharge, 2) }}
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="border-t border-gray-200 pt-3 mt-3">
@@ -557,7 +566,13 @@ $outsideDhakaCharge = Setting::getDeliveryCharge(false);
                                                onchange="updateDeliveryCharge()">
                                         <label for="inside_dhaka">
                                             <div class="delivery-option-title">Inside Dhaka</div>
-                                            <div class="delivery-option-price">৳{{ number_format($insideDhakaCharge, 0) }}</div>
+                                            <div class="delivery-option-price">
+                                                @if($product->free_delivery)
+                                                    <span class="text-green-600 font-semibold">FREE</span>
+                                                @else
+                                                    ৳{{ number_format($insideDhakaCharge, 0) }}
+                                                @endif
+                                            </div>
                                         </label>
                                     </div>
                                     <div class="delivery-option">
@@ -566,7 +581,13 @@ $outsideDhakaCharge = Setting::getDeliveryCharge(false);
                                                onchange="updateDeliveryCharge()">
                                         <label for="outside_dhaka">
                                             <div class="delivery-option-title">Outside Dhaka</div>
-                                            <div class="delivery-option-price">৳{{ number_format($outsideDhakaCharge, 0) }}</div>
+                                            <div class="delivery-option-price">
+                                                @if($product->free_delivery)
+                                                    <span class="text-green-600 font-semibold">FREE</span>
+                                                @else
+                                                    ৳{{ number_format($outsideDhakaCharge, 0) }}
+                                                @endif
+                                            </div>
                                         </label>
                                     </div>
                                 </div>

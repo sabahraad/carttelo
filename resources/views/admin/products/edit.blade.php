@@ -547,7 +547,7 @@
                     </div>
 
                     <!-- Status Toggle -->
-                    <div class="form-group md:col-span-2">
+                    <div class="form-group">
                         <label class="form-label">Product Status</label>
                         <div class="toggle-wrapper">
                             <label class="toggle">
@@ -557,6 +557,21 @@
                             <div class="toggle-label">
                                 <strong>Active</strong>
                                 <span>Product will be visible on the website</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Free Delivery Toggle -->
+                    <div class="form-group">
+                        <label class="form-label">Delivery Charge</label>
+                        <div class="toggle-wrapper">
+                            <label class="toggle">
+                                <input type="checkbox" name="free_delivery" value="1" {{ old('free_delivery', $product->free_delivery) ? 'checked' : '' }}>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="toggle-label">
+                                <strong>Free Delivery</strong>
+                                <span>No delivery charge for this product</span>
                             </div>
                         </div>
                     </div>

@@ -27,6 +27,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['is_active'] = $request->boolean('is_active', true);
+        $data['free_delivery'] = $request->boolean('free_delivery', false);
 
         $product = Product::create($data);
 
@@ -55,6 +56,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['is_active'] = $request->boolean('is_active', false);
+        $data['free_delivery'] = $request->boolean('free_delivery', false);
 
         $product->update($data);
 

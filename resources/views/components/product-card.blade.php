@@ -21,6 +21,13 @@
                     -{{ $product->discountPercentage }}%
                 </div>
             @endif
+            
+            <!-- Free Delivery Badge -->
+            @if ($product->free_delivery)
+                <div class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    🚚 Free Delivery
+                </div>
+            @endif
         </div>
     </a>
     
