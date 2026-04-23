@@ -622,7 +622,7 @@
         function deleteImage(imageId) {
             if (confirm('Delete this image?')) {
                 const form = document.getElementById('deleteImageForm');
-                form.action = '/admin/products/{{ $product->id }}/images/' + imageId;
+                form.action = '/admin/products/{{ $product->slug }}/images/' + imageId;
                 form.submit();
             }
         }
