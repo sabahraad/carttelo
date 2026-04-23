@@ -47,12 +47,15 @@ $outsideDhakaCharge = $product->free_delivery ? 0 : Setting::getDeliveryCharge(f
             justify-content: center;
             align-items: center;
             background: #f3f4f6;
-            aspect-ratio: 1;
+            min-height: 400px;
+            max-height: 600px;
         }
         .product-swiper .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
         .product-thumbs {
             margin-top: 12px;
