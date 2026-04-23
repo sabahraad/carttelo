@@ -25,6 +25,9 @@ Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 Route::get('/track-order', [TrackOrderController::class, 'index'])->name('track-order');
 Route::post('/track-order', [TrackOrderController::class, 'track'])->name('track-order.search');
 Route::get('/order/{order}', [OrderDetailController::class, 'show'])->name('order.detail');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +70,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Settings - Logo
         Route::get('/settings/logo', [SettingsController::class, 'logo'])->name('settings.logo');
         Route::put('/settings/logo', [SettingsController::class, 'updateLogo'])->name('settings.logo.update');
+        
+        // Settings - Social Media
+        Route::get('/settings/social', [SettingsController::class, 'social'])->name('settings.social');
+        Route::put('/settings/social', [SettingsController::class, 'updateSocial'])->name('settings.social.update');
         
         // Admin Users Management
         Route::resource('admins', AdminUserController::class);

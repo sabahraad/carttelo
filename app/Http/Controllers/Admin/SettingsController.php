@@ -93,4 +93,31 @@ class SettingsController extends Controller
         return redirect()->route('admin.settings.logo')
             ->with('success', 'Logo & favicon updated successfully.');
     }
+
+    public function social()
+    {
+        $settings = [
+            'social_facebook' => Setting::get('social_facebook', ''),
+            'social_instagram' => Setting::get('social_instagram', ''),
+            'social_email' => Setting::get('social_email', ''),
+        ];
+
+        return view('admin.settings.social', compact('settings'));
+    }
+
+    public function updateSocial(Request $request)
+    {
+        $request->validate([
+            'social_facebook' => 'nullable|url|max:255',
+            'social_instagram' => 'nullable|url|max:255',
+            'social_email' => 'nullable|email|max:255',
+        ]);
+
+        Setting::set('social_facebook', $request->social_facebook);
+        Setting::set('social_instagram', $request->social_instagram);
+        Setting::set('social_email', $request->social_email);
+
+        return redirect()->route('admin.settings.social')
+            ->with('success', 'Social media links updated successfully.');
+    }
 }
