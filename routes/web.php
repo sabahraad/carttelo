@@ -60,9 +60,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/orders/{order}/invoice/download', [AdminOrderController::class, 'downloadInvoice'])->name('orders.invoice.download');
         Route::get('/orders/{order}/invoice/print', [AdminOrderController::class, 'printInvoice'])->name('orders.invoice.print');
         
-        // Settings
+        // Settings - Delivery Charges
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
         Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+        
+        // Settings - Logo
+        Route::get('/settings/logo', [SettingsController::class, 'logo'])->name('settings.logo');
+        Route::put('/settings/logo', [SettingsController::class, 'updateLogo'])->name('settings.logo.update');
         
         // Admin Users Management
         Route::resource('admins', AdminUserController::class);

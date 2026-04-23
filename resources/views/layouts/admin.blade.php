@@ -7,6 +7,12 @@
 
     <title>@yield('title', 'Admin Dashboard') - Carttelo</title>
 
+    <!-- Favicon -->
+    @php $adminFavicon = \App\Models\Setting::get('site_favicon'); @endphp
+    @if($adminFavicon)
+        <link rel="icon" type="image/png" href="{{ asset('storage/' . $adminFavicon) }}">
+    @endif
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -73,8 +79,13 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-gray-900 text-white flex-shrink-0">
             <div class="p-6">
-                <a href="{{ route('admin.dashboard') }}" class="text-2xl font-bold">
-                    Carttelo Admin
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
+                    @php $adminLogo = \App\Models\Setting::get('site_logo'); @endphp
+                    @if($adminLogo)
+                        <img src="{{ asset('storage/' . $adminLogo) }}" alt="Carttelo" class="h-8 w-auto">
+                    @else
+                        <span class="text-2xl font-bold">Carttelo Admin</span>
+                    @endif
                 </a>
             </div>
 
@@ -110,13 +121,22 @@
                 </a>
 
                 <a href="{{ route('admin.settings.index') }}" 
-                   class="block px-6 py-3 hover:bg-gray-800 {{ request()->routeIs('admin.settings.*') ? 'bg-gray-800 border-l-4 border-blue-500' : '' }}">
+                   class="block px-6 py-3 hover:bg-gray-800 {{ request()->routeIs('admin.settings.index') ? 'bg-gray-800 border-l-4 border-blue-500' : '' }}">
                     <span class="flex items-center">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
-                        Settings
+                        Delivery Charges
+                    </span>
+                </a>
+
+                <a href="{{ route('admin.settings.logo') }}" 
+                   class="block px-6 py-3 hover:bg-gray-800 {{ request()->routeIs('admin.settings.logo') ? 'bg-gray-800 border-l-4 border-blue-500' : '' }}">
+                    <span class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        Logo Settings
                     </span>
                 </a>
 

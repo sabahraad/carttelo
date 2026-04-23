@@ -7,6 +7,12 @@
 
     <title>@yield('title', 'Carttelo - Your Online Store')</title>
 
+    <!-- Favicon -->
+    @php $siteFavicon = \App\Models\Setting::get('site_favicon'); @endphp
+    @if($siteFavicon)
+        <link rel="icon" type="image/png" href="{{ asset('storage/' . $siteFavicon) }}">
+    @endif
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -20,8 +26,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="{{ route('home') }}" class="text-2xl font-bold text-blue-600">
-                        Carttelo
+                    <a href="{{ route('home') }}" class="flex items-center">
+                        @php $siteLogo = \App\Models\Setting::get('site_logo'); @endphp
+                        @if($siteLogo)
+                            <img src="{{ asset('storage/' . $siteLogo) }}" alt="Carttelo" class="h-10 w-auto">
+                        @else
+                            <span class="text-2xl font-bold text-blue-600">Carttelo</span>
+                        @endif
                     </a>
                 </div>
                 <div class="flex items-center space-x-6">
